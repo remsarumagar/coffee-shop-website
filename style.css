@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 :root {
 
     /* Colors */
@@ -43,18 +44,23 @@
 
     --site-max-width: 1300px;
 }
+
 html {
     scroll-behavior: smooth;
 }
 
-/* style for whole site */
+/* =====================================================
+   STYLE FOR WHOLE SITE
+===================================================== */
 
-ul{
+ul {
     list-style: none;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 button {
     cursor: pointer;
     border: none;
@@ -64,46 +70,53 @@ button {
 img {
     width: 100%;
 }
- .section-content {
+
+.section-content {
     margin: 0 auto;
     padding: 0 20px;
     max-width: var(--site-max-width);
- }
- .section-title {
+}
+
+.section-title {
     text-align: center;
     padding: 60px 0 100px;
     text-transform: uppercase;
     font-size: var(--font-size-xl);
- }
-  .section-title::after {
-    content:" ";
+}
+
+.section-title::after {
+    content: "";
     width: 11%;
     height: 5px;
     display: block;
-    margin: 10px auto 0 ;
+    margin: 10px auto 0;
     background-color: var(--secondary-color);
     border-radius: var(--border-radius-s);
-  }
+}
 
-/* navbar styling */
+
+/* =====================================================
+   NAVBAR STYLING
+===================================================== */
 
 header {
-    background-color:black;
+    background-color: rgb(71, 25, 25);
     position: fixed;
     width: 100%;
     z-index: 5;
 }
+
 header .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-
 }
+
 .navbar .nav-logo .logo-text {
     color: var(--secondary-color);
-   font-size: var(--font-size-xl);
-   font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
 }
 
 .navbar .nav-menu {
@@ -111,23 +124,29 @@ header .navbar {
     gap: 10px;
 }
 
-
 .navbar .nav-menu .nav-link {
     color: var(--white-color);
     padding: 10px 18px;
     font-size: var(--font-size-m);
     transition: 0.3s ease;
     border-radius: var(--border-radius-m);
-
 }
+
 .navbar .nav-menu .nav-link:hover {
     background: var(--secondary-color);
     color: var(--primary-color);
 }
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
 .hero-section {
     min-height: 100vh;
     background-color: var(--primary-color);
 }
+
 .hero-section .section-content {
     display: flex;
     min-height: 100vh;
@@ -139,15 +158,16 @@ header .navbar {
 .hero-section .hero-details .title {
     font-size: var(--font-size-xl);
     color: var(--secondary-color);
-    font-family: "miniver", sans-serif;
+    font-family: "Miniver", sans-serif;
 }
-.hero-section .hero-details .subtitle  {
+
+.hero-section .hero-details .subtitle {
     font-size: var(--font-size-xl);
     margin-top: 8px;
     max-width: 70%;
     font-weight: var(--font-weight-semibold);
-
 }
+
 .hero-section .hero-details .description {
     max-width: 70%;
     margin: 24px 0 40px;
@@ -158,6 +178,7 @@ header .navbar {
     display: flex;
     gap: 23px;
 }
+
 .hero-section .hero-details .button {
     padding: 10px 26px;
     color: var(--primary-color);
@@ -165,22 +186,23 @@ header .navbar {
     border-radius: var(--border-radius-m);
     font-weight: var(--font-weight-medium);
     border: 1px solid transparent;
-    transition: 0.3s ease  ;
+    transition: 0.3s ease;
 }
-.hero-section .hero-details .button:hover,.hero-section .hero-details .contact-us {
+
+.hero-section .hero-details .button:hover,
+.hero-section .hero-details .contact-us {
     color: var(--white-color);
     border-color: var(--white-color);
     background-color: transparent;
-
 }
-.hero-section .hero-details .contact-us:hover{
-       color: var(--primary-color);
+
+.hero-section .hero-details .contact-us:hover {
+    color: var(--primary-color);
     border-color: var(--secondary-color);
     background-color: var(--secondary-color);
 }
 
 .hero-section .hero-image-wrapper {
-   
     margin-top: 150px;
     max-width: 500px;
     margin-right: 3px;
@@ -518,4 +540,200 @@ header .navbar {
     font-size: var(--font-size-l);
 }
     
+}
+
+
+/*  mobile responsive */
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.menu-open-button,
+.menu-close-button {
+    display: none;
+}
+
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* Navbar */
+
+    header .navbar {
+        padding: 15px 20px;
+        min-height: 70px;
+    }
+
+
+    /* ================================
+       SHOW ONLY MENU ICON
+    ================================= */
+
+    .menu-open-button {
+        display: block;
+
+        color: var(--white-color);
+
+        font-size: 2rem;
+
+        cursor: pointer;
+
+        background: none;
+
+        border: none;
+
+        z-index: 1002;
+    }
+
+
+    .menu-open-button:hover {
+        color: var(--secondary-color);
+    }
+
+
+    /* ================================
+       MOBILE NAVIGATION
+    ================================= */
+
+    .navbar .nav-menu {
+
+        position: fixed;
+
+        top: 0;
+        right: -100%;
+
+        width: 280px;
+        height: 100vh;
+
+        background-color: var(--primary-color);
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        padding: 80px 25px 30px;
+
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
+
+        transition: right 0.4s ease;
+
+        z-index: 1001;
+    }
+
+
+    /* ================================
+       WHEN MENU IS OPEN
+    ================================= */
+
+    .navbar .nav-menu.active {
+        right: 0;
+    }
+
+
+    /* ================================
+       CLOSE ICON
+       HIDDEN BY DEFAULT
+    ================================= */
+
+    .menu-close-button {
+
+        display: block;
+
+        position: absolute;
+
+        top: 20px;
+
+        right: 20px;
+
+        color: var(--white-color);
+
+        font-size: 2rem;
+
+        background: none;
+
+        border: none;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+    }
+
+
+    .menu-close-button:hover {
+
+        color: var(--secondary-color);
+
+        transform: rotate(90deg);
+    }
+
+
+    /* ================================
+       NAV LINKS
+    ================================= */
+
+    .navbar .nav-menu .nav-item {
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    .navbar .nav-menu .nav-link {
+
+        display: block;
+
+        width: 100%;
+
+        padding: 12px 20px;
+
+        color: var(--white-color);
+
+        font-size: 1rem;
+
+        border-radius: 30px;
+
+        transition: 0.3s ease;
+    }
+
+
+    .navbar .nav-menu .nav-link:hover {
+
+        background-color: var(--secondary-color);
+
+        color: var(--primary-color);
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media screen and (max-width: 480px) {
+
+    header .navbar {
+        padding: 13px 15px;
+    }
+
+    .navbar .nav-logo .logo-text {
+        font-size: 1.5rem;
+    }
+
+    .menu-open-button {
+        font-size: 1.8rem;
+    }
+
+    .navbar .nav-menu {
+        width: 100%;
+    }
 }
