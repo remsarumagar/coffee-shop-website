@@ -407,7 +407,6 @@ header .navbar {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* contact section */
 
 /* Contact section */
 
@@ -543,9 +542,8 @@ header .navbar {
 }
 
 
-/*  mobile responsive */
 /* =====================================================
-   MOBILE MENU
+   MOBILE MENU BUTTONS
 ===================================================== */
 
 .menu-open-button,
@@ -560,20 +558,79 @@ header .navbar {
 
 @media screen and (max-width: 768px) {
 
-    /* Navbar */
+    /* =================================================
+       BODY
+    ================================================= */
 
-    header .navbar {
-        padding: 15px 20px;
-        min-height: 70px;
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden;
     }
 
 
-    /* ================================
-       SHOW ONLY MENU ICON
-    ================================= */
+    /* =================================================
+       NAVBAR
+    ================================================= */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        background: rgba(59, 20, 28, 0.96);
+
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border-bottom: 1px solid rgba(243, 150, 28, 0.25);
+
+        z-index: 1000;
+    }
+
+    header .navbar {
+
+        height: 70px;
+
+        padding: 0 20px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+    }
+
+
+    /* =================================================
+       LOGO
+    ================================================= */
+
+    .navbar .nav-logo .logo-text {
+
+        font-size: 1.6rem;
+
+        color: var(--secondary-color);
+
+        white-space: nowrap;
+    }
+
+
+    /* =================================================
+       HAMBURGER BUTTON
+    ================================================= */
 
     .menu-open-button {
-        display: block;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 45px;
+        height: 45px;
 
         color: var(--white-color);
 
@@ -581,34 +638,232 @@ header .navbar {
 
         cursor: pointer;
 
-        background: none;
-
         border: none;
+
+        background: transparent;
+
+        transition: 0.3s ease;
 
         z-index: 1002;
     }
 
-
     .menu-open-button:hover {
+
         color: var(--secondary-color);
+
+        transform: scale(1.08);
     }
 
 
-    /* ================================
-       MOBILE NAVIGATION
-    ================================= */
+    /* =================================================
+       DARK BACKGROUND OVERLAY
+    ================================================= */
+
+    .navbar::before {
+
+        content: "";
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100vh;
+
+        background: rgba(0, 0, 0, 0.55);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: 0.35s ease;
+
+        z-index: -1;
+    }
+
+
+    /* =================================================
+       MOBILE SIDE MENU
+    ================================================= */
 
     .navbar .nav-menu {
 
         position: fixed;
 
         top: 0;
-        right: -100%;
+        right: 0;
 
-        width: 280px;
+        width: min(320px, 82vw);
+
         height: 100vh;
 
-        background-color: var(--primary-color);
+        margin: 0;
+
+        padding: 95px 25px 30px;
+
+        background:
+            linear-gradient(
+                160deg,
+                #47191f,
+                #2b0d13
+            );
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        justify-content: flex-start;
+
+        gap: 8px;
+
+        box-shadow:
+            -15px 0 40px rgba(0, 0, 0, 0.45);
+
+        transform: translateX(100%);
+
+        visibility: hidden;
+
+        transition:
+            transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            visibility 0.4s;
+
+        z-index: 1001;
+
+        overflow-y: auto;
+    }
+
+
+    /* =================================================
+       OPEN MENU
+    ================================================= */
+
+    .navbar .nav-menu.active {
+
+        transform: translateX(0);
+
+        visibility: visible;
+    }
+
+
+    /* Show overlay when menu is open */
+
+    .navbar:has(.nav-menu.active)::before {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+
+    /* =================================================
+       CLOSE BUTTON
+    ================================================= */
+
+    .menu-close-button {
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+
+        top: 18px;
+        right: 18px;
+
+        width: 45px;
+        height: 45px;
+
+        color: var(--white-color);
+
+        font-size: 1.7rem;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        border-radius: 50%;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+    }
+
+    .menu-close-button:hover {
+
+        color: var(--primary-color);
+
+        background: var(--secondary-color);
+
+        border-color: var(--secondary-color);
+
+        transform: rotate(90deg);
+    }
+
+
+    /* =================================================
+       NAVIGATION LINKS
+    ================================================= */
+
+    .navbar .nav-menu .nav-item {
+
+        width: 100%;
+    }
+
+    .navbar .nav-menu .nav-link {
+
+        display: flex;
+
+        align-items: center;
+
+        width: 100%;
+
+        min-height: 50px;
+
+        padding: 12px 18px;
+
+        color: rgba(255, 255, 255, 0.9);
+
+        font-size: 1rem;
+
+        font-weight: 500;
+
+        border-radius: 12px;
+
+        transition: 0.3s ease;
+    }
+
+    .navbar .nav-menu .nav-link:hover {
+
+        color: var(--primary-color);
+
+        background: var(--secondary-color);
+
+        padding-left: 25px;
+    }
+
+
+    /* =================================================
+       HERO SECTION
+    ================================================= */
+
+    .hero-section {
+
+        min-height: 100vh;
+
+        padding-top: 70px;
+
+        overflow: hidden;
+    }
+
+    .hero-section .section-content {
+
+        min-height: calc(100vh - 70px);
+
+        padding: 50px 20px;
 
         display: flex;
 
@@ -618,122 +873,976 @@ header .navbar {
 
         justify-content: center;
 
-        gap: 15px;
-
-        padding: 80px 25px 30px;
-
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
-
-        transition: right 0.4s ease;
-
-        z-index: 1001;
-    }
-
-
-    /* ================================
-       WHEN MENU IS OPEN
-    ================================= */
-
-    .navbar .nav-menu.active {
-        right: 0;
-    }
-
-
-    /* ================================
-       CLOSE ICON
-       HIDDEN BY DEFAULT
-    ================================= */
-
-    .menu-close-button {
-
-        display: block;
-
-        position: absolute;
-
-        top: 20px;
-
-        right: 20px;
-
-        color: var(--white-color);
-
-        font-size: 2rem;
-
-        background: none;
-
-        border: none;
-
-        cursor: pointer;
-
-        transition: 0.3s ease;
-    }
-
-
-    .menu-close-button:hover {
-
-        color: var(--secondary-color);
-
-        transform: rotate(90deg);
-    }
-
-
-    /* ================================
-       NAV LINKS
-    ================================= */
-
-    .navbar .nav-menu .nav-item {
-
-        width: 100%;
-
         text-align: center;
+
+        gap: 30px;
     }
 
 
-    .navbar .nav-menu .nav-link {
+    /* =================================================
+       HERO TEXT
+    ================================================= */
 
-        display: block;
+    .hero-section .hero-details {
 
         width: 100%;
 
-        padding: 12px 20px;
+        display: flex;
 
-        color: var(--white-color);
+        flex-direction: column;
 
-        font-size: 1rem;
+        align-items: center;
+    }
 
-        border-radius: 30px;
+    .hero-section .hero-details .title {
 
-        transition: 0.3s ease;
+        font-size: 1.8rem;
+
+        margin-bottom: 5px;
+    }
+
+    .hero-section .hero-details .subtitle {
+
+        width: 100%;
+
+        max-width: 600px;
+
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+
+        line-height: 1.25;
+
+        margin-top: 5px;
+    }
+
+    .hero-section .hero-details .description {
+
+        width: 100%;
+
+        max-width: 550px;
+
+        margin: 18px auto 28px;
+
+        font-size: 0.95rem;
+
+        line-height: 1.7;
     }
 
 
-    .navbar .nav-menu .nav-link:hover {
+    /* =================================================
+       HERO BUTTONS
+    ================================================= */
 
-        background-color: var(--secondary-color);
+    .hero-section .hero-details .buttons {
 
-        color: var(--primary-color);
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        width: 100%;
+    }
+
+    .hero-section .hero-details .button {
+
+        min-width: 135px;
+
+        padding: 11px 22px;
+
+        font-size: 0.9rem;
+    }
+
+
+    /* =================================================
+       HERO IMAGE
+    ================================================= */
+
+    .hero-section .hero-image-wrapper {
+
+        width: 100%;
+
+        max-width: 360px;
+
+        margin: 0;
+
+        display: flex;
+
+        justify-content: center;
+    }
+
+    .hero-section .hero-image {
+
+        width: 100%;
+
+        max-width: 360px;
+
+        height: auto;
+
+        object-fit: contain;
     }
 }
 
 
 /* =====================================================
-   SMALL MOBILE
+   SMALL PHONES
 ===================================================== */
 
 @media screen and (max-width: 480px) {
 
     header .navbar {
-        padding: 13px 15px;
+
+        height: 65px;
+
+        padding: 0 15px;
     }
 
     .navbar .nav-logo .logo-text {
-        font-size: 1.5rem;
+
+        font-size: 1.4rem;
     }
 
     .menu-open-button {
+
+        width: 40px;
+        height: 40px;
+
         font-size: 1.8rem;
     }
 
+
+    /* Side menu */
+
     .navbar .nav-menu {
+
+        width: min(300px, 86vw);
+
+        padding: 85px 20px 25px;
+    }
+
+
+    /* Hero */
+
+    .hero-section {
+
+        padding-top: 65px;
+    }
+
+    .hero-section .section-content {
+
+        min-height: calc(100vh - 65px);
+
+        padding: 40px 15px;
+
+        gap: 25px;
+    }
+
+    .hero-section .hero-details .title {
+
+        font-size: 1.55rem;
+    }
+
+    .hero-section .hero-details .subtitle {
+
+        font-size: 1.8rem;
+    }
+
+    .hero-section .hero-details .description {
+
+        font-size: 0.88rem;
+
+        line-height: 1.65;
+    }
+
+
+    /* Buttons */
+
+    .hero-section .hero-details .buttons {
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .hero-section .hero-details .button {
+
+        width: 220px;
+
+        min-width: 0;
+    }
+
+
+    /* Image */
+
+    .hero-section .hero-image-wrapper {
+
+        max-width: 290px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media screen and (max-width: 360px) {
+
+    .navbar .nav-logo .logo-text {
+
+        font-size: 1.3rem;
+    }
+
+    .hero-section .hero-details .subtitle {
+
+        font-size: 1.6rem;
+    }
+
+    .hero-section .hero-details .description {
+
+        font-size: 0.82rem;
+    }
+
+    .hero-section .hero-image-wrapper {
+
+        max-width: 250px;
+    }
+}
+/*  mobile responsive  */
+/* =====================================================
+   ABOUT + MENU + TESTIMONIALS
+   MOBILE RESPONSIVE DESIGN
+===================================================== */
+
+
+/* =====================================================
+   TABLET RESPONSIVE
+   769px - 1024px
+===================================================== */
+
+@media screen and (max-width: 1024px) {
+
+    /* ================================
+       ABOUT SECTION
+    ================================= */
+
+    .about-section {
+        padding: 90px 40px;
+    }
+
+    .about-section .section-contact {
+        gap: 40px;
+    }
+
+    .about-section .about-image-wrapper .about-image {
+        width: 330px;
+        height: 330px;
+    }
+
+    .about-section .about-details {
+        max-width: 55%;
+    }
+
+    .about-section .about-details .section-title {
+        padding: 30px 0;
+    }
+
+    .about-section .about-details .text {
+        line-height: 1.8;
+    }
+
+
+    /* ================================
+       MENU SECTION
+    ================================= */
+
+    .menu-section {
+        padding: 70px 30px 80px;
+    }
+
+    .menu-section .menu-list {
+        gap: 60px 30px;
+    }
+
+    .menu-section .menu-list .menu-item {
+        width: calc(50% - 15px);
+    }
+
+    .menu-section .menu-list .menu-item .menu-image {
+        max-width: 70%;
+    }
+}
+
+
+/* =====================================================
+   MOBILE RESPONSIVE
+   MAX WIDTH: 768px
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+
+    /* =================================================
+       SECTION TITLE
+    ================================================= */
+
+    .section-title {
+
+        padding: 45px 0 60px;
+
+        font-size: 1.8rem;
+    }
+
+    .section-title::after {
+
+        width: 60px;
+
+        height: 4px;
+
+        margin-top: 8px;
+    }
+
+
+    /* =================================================
+       ABOUT SECTION
+    ================================================= */
+
+    .about-section {
+
+        padding: 70px 20px;
+
+        background-color: var(--light-pink-color);
+
+        overflow: hidden;
+    }
+
+
+    /* About content becomes vertical */
+
+    .about-section .section-contact {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 25px;
+
         width: 100%;
+    }
+
+
+    /* ================================
+       ABOUT IMAGE
+    ================================= */
+
+    .about-section .about-image-wrapper {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+    .about-section .about-image-wrapper .about-image {
+
+        width: 280px;
+
+        height: 280px;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        border: 5px solid rgba(243, 150, 28, 0.25);
+
+        box-shadow:
+            0 15px 40px rgba(59, 20, 28, 0.18);
+
+        transition: transform 0.4s ease;
+    }
+
+    .about-section .about-image-wrapper .about-image:hover {
+
+        transform: scale(1.03);
+    }
+
+
+    /* ================================
+       ABOUT DETAILS
+    ================================= */
+
+    .about-section .about-details {
+
+        width: 100%;
+
+        max-width: 600px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+    }
+
+
+    /* About heading */
+
+    .about-section .about-details .section-title {
+
+        padding: 25px 0 20px;
+
+        margin: 0;
+
+        font-size: 1.8rem;
+
+        width: 100%;
+    }
+
+
+    /* About paragraph */
+
+    .about-section .about-details .text {
+
+        width: 100%;
+
+        max-width: 550px;
+
+        margin: 5px 0 30px;
+
+        font-size: 0.95rem;
+
+        line-height: 1.8;
+
+        text-align: center;
+
+        color: var(--dark-color);
+    }
+
+
+    /* ================================
+       SOCIAL ICONS
+    ================================= */
+
+    .about-section .social-link-list {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 15px;
+
+        margin-top: 5px;
+    }
+
+    .about-section .social-link-list .social-link {
+
+        width: 42px;
+
+        height: 42px;
+
+        font-size: 1.2rem;
+
+        border: 1px solid rgba(59, 20, 28, 0.15);
+
+        background-color: rgba(255, 255, 255, 0.6);
+
+        transition: all 0.3s ease;
+    }
+
+    .about-section .social-link-list .social-link:hover {
+
+        background-color: var(--secondary-color);
+
+        color: var(--white-color);
+
+        transform: translateY(-5px);
+    }
+
+
+    /* =================================================
+       MENU SECTION
+    ================================================= */
+
+    .menu-section {
+
+        padding: 55px 20px 70px;
+
+        background-color: var(--dark-color);
+
+        overflow: hidden;
+    }
+
+
+    /* Menu heading */
+
+    .menu-section > .section-title {
+
+        color: var(--white-color);
+
+        padding: 30px 0 55px;
+
+        margin: 0;
+    }
+
+
+    /* ================================
+       MENU GRID
+    ================================= */
+
+    .menu-section .section-content {
+
+        width: 100%;
+
+        padding: 0;
+
+        max-width: 650px;
+
+        margin: 0 auto;
+    }
+
+    .menu-section .menu-list {
+
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 45px 20px;
+
+        width: 100%;
+
+        align-items: stretch;
+    }
+
+
+    /* ================================
+       MENU CARD
+    ================================= */
+
+    .menu-section .menu-list .menu-item {
+
+        width: 100%;
+
+        min-width: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: flex-start;
+
+        text-align: center;
+
+        padding: 10px 5px;
+
+        border-radius: 18px;
+
+        transition: transform 0.3s ease;
+    }
+
+
+    /* ================================
+       MENU IMAGE
+    ================================= */
+
+    .menu-section .menu-list .menu-item .menu-image {
+
+        width: 100%;
+
+        max-width: 180px;
+
+        aspect-ratio: 1;
+
+        object-fit: contain;
+
+        margin-bottom: 12px;
+
+        transition:
+            transform 0.4s ease,
+            filter 0.4s ease;
+    }
+
+    .menu-section .menu-list .menu-item:hover .menu-image {
+
+        transform: scale(1.07) rotate(3deg);
+
+        filter: drop-shadow(
+            0 10px 15px rgba(243, 150, 28, 0.18)
+        );
+    }
+
+
+    /* ================================
+       MENU NAME
+    ================================= */
+
+    .menu-section .menu-list .menu-item .name {
+
+        font-size: 1.05rem;
+
+        line-height: 1.4;
+
+        margin-bottom: 8px;
+
+        color: var(--white-color);
+    }
+
+
+    /* ================================
+       MENU DESCRIPTION
+    ================================= */
+
+    .menu-section .menu-list .menu-item .text {
+
+        max-width: 250px;
+
+        font-size: 0.82rem;
+
+        line-height: 1.6;
+
+        color: rgba(255, 255, 255, 0.72);
+
+        margin: 0 auto;
+    }
+
+
+    /* =================================================
+       TESTIMONIAL SECTION
+    ================================================= */
+
+    .testimonals-section {
+
+        padding: 60px 20px 80px;
+
+        overflow: hidden;
+    }
+
+    .testimonals-section .section-title {
+
+        padding: 30px 0 55px;
+    }
+
+
+    /* Swiper container */
+
+    .testimonals-section .slider-container {
+
+        width: 100%;
+
+        max-width: 600px;
+
+        margin: 0 auto;
+
+        padding: 0 10px 50px;
+    }
+
+
+    /* Swiper slide */
+
+    .testimonals-section .testimonial {
+
+        padding: 25px 20px;
+
+        text-align: center;
+    }
+
+
+    /* User image */
+
+    .testimonals-section .user-image {
+
+        width: 90px;
+
+        height: 90px;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        margin: 0 auto 15px;
+    }
+
+
+    /* Testimonial name */
+
+    .testimonals-section .testimonial .name {
+
+        font-size: 1.1rem;
+
+        margin-bottom: 10px;
+    }
+
+
+    /* Feedback */
+
+    .testimonals-section .testimonial .feedback {
+
+        display: block;
+
+        font-size: 0.9rem;
+
+        line-height: 1.7;
+
+        padding: 0 10px;
+    }
+
+
+    /* Swiper arrows */
+
+    .testimonals-section .swiper-button-prev,
+    .testimonals-section .swiper-button-next {
+
+        transform: scale(0.75);
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+   MAX WIDTH: 480px
+===================================================== */
+
+@media screen and (max-width: 480px) {
+
+
+    /* =================================================
+       SECTION TITLE
+    ================================================= */
+
+    .section-title {
+
+        font-size: 1.55rem;
+
+        padding: 35px 0 45px;
+    }
+
+
+    /* =================================================
+       ABOUT
+    ================================================= */
+
+    .about-section {
+
+        padding: 55px 15px 65px;
+    }
+
+    .about-section .about-image-wrapper .about-image {
+
+        width: 230px;
+
+        height: 230px;
+    }
+
+    .about-section .about-details .section-title {
+
+        font-size: 1.55rem;
+
+        padding: 20px 0;
+    }
+
+    .about-section .about-details .text {
+
+        font-size: 0.88rem;
+
+        line-height: 1.75;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* Social icons */
+
+    .about-section .social-link-list {
+
+        gap: 12px;
+    }
+
+    .about-section .social-link-list .social-link {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 1.05rem;
+    }
+
+
+    /* =================================================
+       MENU
+    ================================================= */
+
+    .menu-section {
+
+        padding: 45px 15px 60px;
+    }
+
+    .menu-section > .section-title {
+
+        padding: 25px 0 45px;
+    }
+
+
+    /* Two columns remain on normal phones */
+
+    .menu-section .menu-list {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 40px 12px;
+    }
+
+
+    .menu-section .menu-list .menu-item {
+
+        padding: 5px 2px;
+    }
+
+
+    .menu-section .menu-list .menu-item .menu-image {
+
+        max-width: 135px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .menu-section .menu-list .menu-item .name {
+
+        font-size: 0.9rem;
+
+        margin-bottom: 6px;
+    }
+
+
+    .menu-section .menu-list .menu-item .text {
+
+        font-size: 0.73rem;
+
+        line-height: 1.5;
+    }
+
+
+    /* =================================================
+       TESTIMONIAL
+    ================================================= */
+
+    .testimonals-section {
+
+        padding: 50px 12px 65px;
+    }
+
+    .testimonals-section .section-title {
+
+        padding: 25px 0 45px;
+    }
+
+    .testimonals-section .slider-container {
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+    .testimonals-section .testimonial {
+
+        padding: 20px 10px;
+    }
+
+    .testimonals-section .user-image {
+
+        width: 80px;
+
+        height: 80px;
+    }
+
+    .testimonals-section .testimonial .name {
+
+        font-size: 1rem;
+    }
+
+    .testimonals-section .testimonial .feedback {
+
+        font-size: 0.82rem;
+
+        line-height: 1.6;
+    }
+
+
+    /* Smaller arrows */
+
+    .testimonals-section .swiper-button-prev,
+    .testimonals-section .swiper-button-next {
+
+        transform: scale(0.65);
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+   MAX WIDTH: 360px
+===================================================== */
+
+@media screen and (max-width: 360px) {
+
+
+    /* About */
+
+    .about-section .about-image-wrapper .about-image {
+
+        width: 200px;
+
+        height: 200px;
+    }
+
+    .about-section .about-details .text {
+
+        font-size: 0.82rem;
+    }
+
+
+    /* Menu */
+
+    .menu-section .menu-list {
+
+        gap: 35px 8px;
+    }
+
+    .menu-section .menu-list .menu-item .menu-image {
+
+        max-width: 115px;
+    }
+
+    .menu-section .menu-list .menu-item .name {
+
+        font-size: 0.82rem;
+    }
+
+    .menu-section .menu-list .menu-item .text {
+
+        font-size: 0.68rem;
+    }
+
+
+    /* Testimonials */
+
+    .testimonals-section .testimonial .feedback {
+
+        font-size: 0.78rem;
     }
 }
